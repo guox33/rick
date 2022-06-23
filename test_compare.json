@@ -1,0 +1,257 @@
+{
+  "id": 170,
+  "biz": 0,
+  "is_build_in": true,
+  "category": 1,
+  "view_scope": 2,
+  "service_id": 4,
+  "service_name": "性能防劣化",
+  "tool": {
+    "id": 9,
+    "name": "性能防劣化",
+    "creator": "lujiale",
+    "description": "性能防劣化录制回放runner",
+    "ui_config": "[{\"key\":\"case_need_dispatch\",\"label\":\"是否分发 Case\",\"formItem\":{\"extra\":\"选【是】，同一条case，只会被某一台设备执行一次；选【否】，则同一条case，会被所有设备各执行 N 次， N 为用例重复运行次数\"},\"rule\":{\"required\":true,\"message\":\"必须选择是否分发 Case\"},\"component\":{\"tag\":\"radio\",\"options\":[{\"value\":true,\"label\":\"是\"},{\"value\":false,\"label\":\"否\"}]},\"children\":[{\"show\":false,\"key\":\"case_execute_times\",\"label\":\"运行次数\",\"value\":1,\"formItem\":{\"extra\":\"用例重复运行次数\"},\"rule\":{\"required\":true,\"message\":\"必须选择是否分发 Case\"},\"component\":{\"tag\":\"input\",\"inputType\":\"number\"}},{\"show\":false,\"key\":\"case_local_retry_times\",\"label\":\"失败重试次数\",\"formItem\":{\"extra\":\"用例失败时，最多重试几次\"},\"rule\":{\"required\":true,\"message\":\"请填写重试次数\"},\"component\":{\"tag\":\"input\",\"inputType\":\"number\"}},{\"show\":true,\"key\":\"case_remote_retry_times\",\"label\":\"失败重试次数\",\"formItem\":{\"extra\":\"用例失败时，最多重试几次\"},\"rule\":{\"required\":true,\"message\":\"请填写重试次数\"},\"component\":{\"tag\":\"input\",\"inputType\":\"number\"}}]},{\"key\":\"need_repack\",\"label\":\"是否重打包\",\"formItem\":{\"extra\":\"使用 shoots-android 库时，非 root 手机需要重打包\"},\"rule\":{\"required\":true},\"component\":{\"tag\":\"radio\",\"options\":[{\"value\":true,\"label\":\"是\"},{\"value\":false,\"label\":\"否\"}]}},{\"key\":\"path_blacklist\",\"label\":\"接口黑名单(不参与录制)\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":false},\"component\":{\"tag\":\"select\",\"multiple\":true,\"clearable\":true,\"create\":true,\"options\":[]}},{\"key\":\"replay_strict_mode\",\"label\":\"时间按照录制返回的时间回放\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":true},\"component\":{\"tag\":\"radio\",\"options\":[{\"value\":true,\"label\":\"是\"},{\"value\":false,\"label\":\"否\"}]}},{\"key\":\"replay_collection\",\"label\":\"mock集合名称\",\"value\":\"\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":false},\"component\":{\"tag\":\"input\"}},{\"key\":\"case_record_times\",\"label\":\"重复录制次数\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":true},\"component\":{\"tag\":\"input\",\"placeholder\":\"\",\"inputType\":\"number\"}},{\"key\":\"record_case_gap_time\",\"label\":\"录制阶段用例间隔时长\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":true},\"component\":{\"tag\":\"input\",\"placeholder\":\"\",\"inputType\":\"number\"}},{\"key\":\"replay_case_gap_time\",\"label\":\"回放阶段用例间隔时长\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":true},\"component\":{\"tag\":\"input\",\"placeholder\":\"\",\"inputType\":\"number\"}},{\"key\":\"proxy_host_mapping\",\"label\":\"按域名修改请求\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":false},\"component\":{\"tag\":\"select\",\"multiple\":true,\"clearable\":true,\"create\":true,\"options\":[]}}]",
+    "report_config": "{\"type\":\"case\",\"menuData\":[{\"key\":\"result\",\"title\":\"测试结果\",\"component\":\"CaseSummary\", \"showFuzzBtn\": true},{\"key\":\"devices\",\"title\":\"设备状态\",\"component\":\"RunningDevices\"},{\"key\":\"crashes\",\"title\":\"异常信息\",\"component\":\"CrashList\"}]}"
+  },
+  "creator": "limeng.playhard",
+  "managers": [],
+  "name": "性能防劣化 Android 通用模板",
+  "description": "性能防劣化 Android 通用模板",
+  "platform": 1,
+  "libs": [],
+  "lang_type": 2,
+  "device_filters": [
+    {
+      "and_conditions": [
+        {
+          "or_conditions": [
+            {
+              "field_name": "Model",
+              "field_values": [
+                "AOSP on blueline"
+              ],
+              "operation": "="
+            }
+          ]
+        }
+      ],
+      "number": 1,
+      "is_required": false
+    },
+    {
+      "and_conditions": [
+        {
+          "or_conditions": [
+            {
+              "field_name": "Model",
+              "field_values": [
+                "AOSP on walleye"
+              ],
+              "operation": "="
+            }
+          ]
+        }
+      ],
+      "number": 1,
+      "is_required": false
+    },
+    {
+      "and_conditions": [
+        {
+          "or_conditions": [
+            {
+              "field_name": "Model",
+              "field_values": [
+                "AOSP on msm8996"
+              ],
+              "operation": "="
+            }
+          ]
+        }
+      ],
+      "number": 1,
+      "is_required": false
+    }
+  ],
+  "device_max_dispatch_time": 1800,
+  "need_all_device_pass": false,
+  "timeout": 7200,
+  "callback_url": "",
+  "callback_ext": "",
+  "lark_members": [],
+  "lark_groups": [],
+  "crash_filter": {
+    "crash_types": [
+      "anr",
+      "native",
+      "app",
+      "start"
+    ],
+    "status": [
+      "new_created",
+      "doing",
+      "unassigned",
+      "done",
+      "be_processed_again"
+    ],
+    "key_words": []
+  },
+  "block_clean_up": false,
+  "block_clean_up_before_install": false,
+  "block_install": false,
+  "need_screen_recording": true,
+  "need_intelligent_case_analysis": true,
+  "need_perf_data_analysis": true,
+  "lark_send_time": 15,
+  "lark_default_content": 0,
+  "lark_user_content": "",
+  "notification_config": "{}",
+  "is_default_start_up": false,
+  "run_param_map": {
+    "additional_open_trace_case_times": 0,
+    "binary_search": false,
+    "case_execute_times": 20,
+    "case_local_retry_times": 0,
+    "case_need_dispatch": false,
+    "case_record_times": 1,
+    "case_remote_retry_times": 0,
+    "file_handlers": {},
+    "is_return_500": false,
+    "need_clear_package_data": true,
+    "need_partial_open_trace": false,
+    "need_repack": true,
+    "need_rocket_bug": false,
+    "network_mode": 1,
+    "path_blacklist": [
+      "/monitor/collect/",
+      "/monitor/collect/c/crash",
+      "/monitor/collect/c/native_bin_crash",
+      "/monitor/collect/c/exception"
+    ],
+    "path_host_mapping": [],
+    "priority": "P3",
+    "proxy_hit_mapping": [],
+    "proxy_job_ids": {},
+    "record_case_gap_time": 10,
+    "repack_type": "",
+    "replay_case_gap_time": 10,
+    "replay_collection": "0404d8b3b7c1b98ac391e8ebdbe7f4f0",
+    "replay_strict_mode": false,
+    "report_filter": {},
+    "script_id": 0,
+    "shoots_case_filter": {
+      "case_paths": [],
+      "excluded_case_paths": [],
+      "excluded_tags": [],
+      "owners": [],
+      "tags": []
+    }
+  },
+  "user_param_map": {},
+  "plugin_configs": [
+    {
+      "plugin": {
+        "id": 42,
+        "name": "通用性能数据采集插件",
+        "is_build_in": true,
+        "creator": "chenzetao",
+        "description": "cpu/gpu/fps/pss等简单通用数据采集插件",
+        "url": "git@code.byted.org:clientQA/bytest_plugin.git",
+        "branch": "boe",
+        "commit_id": "",
+        "entrance": "record_indicators_plugin.Plugin",
+        "run_param_map": {
+          "collect_type": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "enable": true,
+          "interval": 2000
+        },
+        "ui_config": "[{\"component\":{\"options\":[{\"label\":\"是\",\"value\":true},{\"label\":\"否\",\"value\":false}],\"tag\":\"radio\"},\"formItem\":{\"extra\":\"\"},\"key\":\"enable\",\"label\":\"是否启用\",\"rule\":{\"required\":true}},{\"key\":\"interval\",\"label\":\"采集间隔\",\"formItem\":{\"extra\":\"采集间隔需为100ms的整数倍\"},\"rule\":{\"required\":false},\"component\":{\"tag\":\"input\",\"placeholder\":\"单位ms，默认 2000\"}},{\"key\":\"collect_type\",\"label\":\"采集数据\",\"formItem\":{\"extra\":\"\"},\"rule\":{\"required\":false},\"component\":{\"tag\":\"checkbox\",\"placeholder\":\"checkbox\",\"options\":[{\"value\":1,\"label\":\"FPS\"},{\"value\":2,\"label\":\"CPU\"},{\"value\":3,\"label\":\"GPU\"},{\"value\":4,\"label\":\"Memory\"},{\"value\":5,\"label\":\"Disk\"},{\"value\":6,\"label\":\"Network\"},{\"value\":7,\"label\":\"Battery\"},{\"value\":8,\"label\":\"Fd\"},{\"value\":9,\"label\":\"Thread\"},{\"value\":10,\"label\":\"Temperature\"}]}}]",
+        "is_invisible": false
+      },
+      "run_param_map": {
+        "collect_type": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "enable": true,
+        "interval": 2000
+      }
+    },
+    {
+      "plugin": {
+        "id": 41,
+        "name": "Atrace采集插件",
+        "is_build_in": false,
+        "creator": "chenzetao",
+        "description": "cpu/gpu/io/memory/network等详细性能数据采集插件",
+        "url": "git@code.byted.org:clientQA/bytest_plugin.git",
+        "branch": "boe",
+        "commit_id": "",
+        "entrance": "record_atrace_plugin.Plugin",
+        "run_param_map": {
+          "enable": true
+        },
+        "ui_config": "[{\"component\":{\"options\":[{\"label\":\"是\",\"value\":true},{\"label\":\"否\",\"value\":false}],\"tag\":\"radio\"},\"formItem\":{\"extra\":\"\"},\"key\":\"enable\",\"label\":\"是否启用\",\"rule\":{\"required\":true}}]",
+        "is_invisible": true
+      },
+      "run_param_map": {
+        "enable": true
+      }
+    },
+    {
+      "plugin": {
+        "id": 43,
+        "name": "Trace文件合并插件",
+        "is_build_in": false,
+        "creator": "chenzetao",
+        "description": "对各种采集文件进行合并插件，需放在插件列表最后执行",
+        "url": "git@code.byted.org:clientQA/bytest_plugin.git",
+        "branch": "boe",
+        "commit_id": "",
+        "entrance": "record_trace_file_merge.Plugin",
+        "run_param_map": {
+          "enable": true
+        },
+        "ui_config": "[{\"component\":{\"options\":[{\"label\":\"是\",\"value\":true},{\"label\":\"否\",\"value\":false}],\"tag\":\"radio\"},\"formItem\":{\"extra\":\"\"},\"key\":\"enable\",\"label\":\"是否启用\",\"rule\":{\"required\":true}}]",
+        "is_invisible": true
+      },
+      "run_param_map": {
+        "enable": true
+      }
+    },
+    {
+      "plugin": {
+        "id": 34,
+        "name": "Nanoscope采集插件",
+        "is_build_in": false,
+        "creator": "chenzetao",
+        "description": "高精度method trace采集插件",
+        "url": "git@code.byted.org:clientQA/bytest_plugin.git",
+        "branch": "boe",
+        "commit_id": "",
+        "entrance": "record_nanoscope_plugin.Plugin",
+        "run_param_map": {
+          "enable": true
+        },
+        "ui_config": "[{\"component\":{\"options\":[{\"label\":\"是\",\"value\":true},{\"label\":\"否\",\"value\":false}],\"tag\":\"radio\"},\"formItem\":{\"extra\":\"\"},\"key\":\"enable\",\"label\":\"是否启用\",\"rule\":{\"required\":true}}]",
+        "is_invisible": true
+      },
+      "run_param_map": {
+        "enable": true
+      }
+    }
+  ],
+  "environ_map": {},
+  "tags": [],
+  "has_cron_job": false,
+  "num_task": 0,
+  "last_running_time": null
+}
