@@ -6,7 +6,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/robfig/cron"
 	"strings"
 	"time"
 )
@@ -266,12 +265,5 @@ func GetCity(a *Address) string {
 }
 
 func main() {
-	c := cron.New()
-	_ = c.AddFunc("*/12 * * * * *", func() {
-		fmt.Println("hello")
-	})
-	c.Start()
-	es := c.Entries()[0]
-	fmt.Printf("%+v", es.Next)
-	time.Sleep(10 * time.Second)
+
 }
