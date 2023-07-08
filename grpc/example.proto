@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "guide.proto";
+
+option go_package = "grpc";
+
+message Point {
+  int32 latitude = 1;
+  int32 longitude = 2;
+  RouteSummary hello = 3;
+}
+
+message Feature {
+  string hello = 1;
+}
+
+service RouteGuide {
+  rpc GetFeature(Point) returns (Feature) {}
+}
