@@ -1,32 +1,27 @@
 package main
 
 import (
-	"code.byted.org/gopkg/retry"
-	"errors"
-	"fmt"
-	"time"
+	"code.byted.org/clientQA/rick/http_framework/framework"
+	"net/http"
 )
 
-type fileRespWrite struct {
+func FooHandle(request *http.Request, response http.ResponseWriter) {
+	ctx := framework.NewContext(request, response)
+	_ = FooControllerHandler(ctx)
 }
 
-/*func (f *fileRespWrite) Write() {
-
+func FooControllerHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
 }
-
-func (f *fileRespWrite) Header() http.Header {
-
-}
-
-func (f *fileRespWrite) WriteHeader(statusCode int) {
-
-}*/
 
 func main() {
-	err := retry.Do("what", 2, time.Second, func() error {
-		fmt.Println("hello")
-		// time.Sleep(time.Minute)
-		return errors.New("world")
-	})
-	fmt.Println(err.Error())
+	core := framework.NewCore()
+	registerRouter(core)
+	server := http.Server{Handler: core, Addr: ":80"}
+	err := server.ListenAndServe()
+	if err != nil {
+		panic(err)
+	}
 }
