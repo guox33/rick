@@ -1,30 +1,27 @@
 package main
 
 import (
-	"context"
-	"log"
+	"github.com/guox33/rick/http_framework/framework"
 	"net/http"
 )
 
-type fooHandler struct {
+func FooHandle(request *http.Request, response http.ResponseWriter) {
+	ctx := framework.NewContext(request, response)
+	_ = FooControllerHandler(ctx)
 }
 
-func (f *fooHandler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
-	_, _ = writer.Write([]byte("you know"))
-	writer.WriteHeader(200)
+func FooControllerHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
 }
 
 func main() {
-	http.Handle("/foo", &fooHandler{})
-
-	http.HandleFunc("/bar", func(writer http.ResponseWriter, request *http.Request) {
-		_, _ = writer.Write([]byte("hello world"))
-		writer.WriteHeader(200)
-	})
-
-	context.Background()
-
-	http.NotFoundHandler()
-
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	core := framework.NewCore()
+	registerRouter(core)
+	server := http.Server{Handler: core, Addr: ":80"}
+	err := server.ListenAndServe()
+	if err != nil {
+		panic(err)
+	}
 }
