@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 )
@@ -20,6 +21,8 @@ func main() {
 		_, _ = writer.Write([]byte("hello world"))
 		writer.WriteHeader(200)
 	})
+
+	context.Background()
 
 	http.NotFoundHandler()
 
