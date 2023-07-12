@@ -1,7 +1,7 @@
 package main
 
 import (
-	"code.byted.org/clientQA/rick/http_framework/framework"
+	"github.com/guox33/rick/http_framework/framework"
 	"net/http"
 )
 

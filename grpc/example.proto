@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "guide.proto";
 
 option go_package = "grpc";
 

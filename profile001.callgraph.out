@@ -2,7 +2,7 @@ positions: instr line
 events: cpu(ms)
 
 ob=
-fl=(1) /Users/bytedance/go/src/code.byted.org/clientQA/rick/main.go
+fl=(1) /Users/bytedance/go/src/github.com/guox33/rick/main.go
 fn=(1) main.A
 0x14a9c9c 63 70
 +15 62 40

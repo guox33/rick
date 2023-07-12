@@ -1,4 +1,4 @@
-module code.byted.org/clientQA/rick/http_framework
+module github.com/guox33/rick/http_framework
 
 go 1.19
 

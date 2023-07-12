@@ -1,6 +1,6 @@
 package main
 
-import "code.byted.org/clientQA/rick/http_framework/framework"
+import "github.com/guox33/rick/http_framework/framework"
 
 func registerRouter(core *framework.Core) {
 	core.Get("foo", FooControllerHandler)
