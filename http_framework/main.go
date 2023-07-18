@@ -5,12 +5,37 @@ import (
 	"net/http"
 )
 
-func FooHandle(request *http.Request, response http.ResponseWriter) {
-	ctx := framework.NewContext(request, response)
-	_ = FooControllerHandler(ctx)
+func FooControllerHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
 }
 
-func FooControllerHandler(ctx *framework.Context) error {
+func UserLoginHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
+}
+
+func SubjectDelHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
+}
+
+func SubjectUpdateHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
+}
+
+func SubjectGetHandler(ctx *framework.Context) error {
+	return ctx.Json(200, map[string]interface{}{
+		"hello": "world",
+	})
+}
+
+func SubjectListHandler(ctx *framework.Context) error {
 	return ctx.Json(200, map[string]interface{}{
 		"hello": "world",
 	})
