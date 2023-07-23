@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"log"
 	"net/http"
 	"strconv"
 	"sync"
@@ -18,6 +19,7 @@ func NewContext(request *http.Request, response http.ResponseWriter) *Context {
 		response:   response,
 		writeMutex: &sync.Mutex{},
 		hasTimeout: false,
+		index:      -1,
 	}
 }
 
@@ -28,7 +30,19 @@ type Context struct {
 	// Write lock
 	writeMutex *sync.Mutex
 	// Flag which represent timeout or not
-	hasTimeout bool
+	hasTimeout     bool
+	requestTimeout *time.Duration
+
+	handlerChain ControlHandlerChain
+	index        int8
+}
+
+func (c *Context) Next() {
+	c.index++
+	for c.index < int8(len(c.handlerChain)) {
+		c.handlerChain[c.index](c)
+		c.index++
+	}
 }
 
 func (c *Context) WriteMux() *sync.Mutex {
@@ -53,6 +67,15 @@ func (c *Context) HasTimeout() bool {
 
 func (c *Context) SetHasTimeout() {
 	c.hasTimeout = true
+	return
+}
+
+func (c *Context) RequestTimeout() *time.Duration {
+	return c.requestTimeout
+}
+
+func (c *Context) SetRequestTimeout(t time.Duration) {
+	c.requestTimeout = &t
 	return
 }
 
@@ -176,6 +199,8 @@ func (c *Context) Json(status int, data interface{}) error {
 		return nil
 	}
 
+	log.Default().Println("text: ", data)
+
 	c.response.WriteHeader(status)
 	c.response.Header().Set("Content-Type", "application/json")
 	body, err := json.Marshal(data)
@@ -207,6 +232,8 @@ func (c *Context) Text(status int, data string) error {
 	if c.request == nil {
 		return errors.New("request is nil")
 	}
+
+	log.Default().Println("text: " + data)
 
 	c.response.WriteHeader(status)
 	c.response.Header().Set("Content-Type", "text/plain")

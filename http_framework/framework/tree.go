@@ -13,7 +13,7 @@ func NewTree() *Tree {
 	return &Tree{root: &node{}}
 }
 
-func (t *Tree) AddRouter(uri string, handler ControllerHandler) error {
+func (t *Tree) AddRouter(uri string, handler ...ControlHandler) error {
 	if !strings.HasPrefix(uri, "/") {
 		return errors.New("uri must start with '/': " + uri)
 	}
@@ -21,14 +21,14 @@ func (t *Tree) AddRouter(uri string, handler ControllerHandler) error {
 		return errors.New("router exist: " + uri)
 	}
 
-	segments := strings.Split(uri, "/")
+	segments := strings.Split(uri[1:], "/")
 	idx, n := 0, t.root
 	for i, seg := range segments {
 		if !isWildSegment(seg) {
 			seg = strings.ToUpper(seg)
 		}
 
-		cnodes := n.filterNode(seg)
+		cnodes := n.filterChildNode(seg)
 		var tmp *node
 		for _, nn := range cnodes {
 			if nn.segment == seg {
@@ -55,10 +55,10 @@ func (t *Tree) AddRouter(uri string, handler ControllerHandler) error {
 	return nil
 }
 
-func (t *Tree) FindHandler(uri string) ControllerHandler {
+func (t *Tree) findNode(uri string) *node {
 	n := t.root.matchNode(strings.ToUpper(uri))
 	if n != nil {
-		return n.handler
+		return n
 	}
 	return nil
 }
@@ -66,11 +66,11 @@ func (t *Tree) FindHandler(uri string) ControllerHandler {
 type node struct {
 	isLast   bool
 	segment  string
-	handler  ControllerHandler
+	handler  ControlHandlerChain
 	children []*node
 }
 
-func (n *node) filterNode(segment string) []*node {
+func (n *node) filterChildNode(segment string) []*node {
 	if len(n.children) == 0 {
 		return nil
 	}
@@ -89,21 +89,18 @@ func (n *node) filterNode(segment string) []*node {
 }
 
 func (n *node) matchNode(uri string) *node {
-	if uri == "" || uri == "/" {
-		return n
-	}
 	if uri[0] == '/' {
 		uri = uri[1:]
 	}
 	segments := strings.SplitN(uri, "/", 2)
 
-	cnodes := n.filterNode(segments[0])
-	if len(cnodes) == 0 {
+	childNodes := n.filterChildNode(segments[0])
+	if len(childNodes) == 0 {
 		return nil
 	}
 
 	if len(segments) == 1 {
-		for _, nn := range cnodes {
+		for _, nn := range childNodes {
 			if nn.isLast {
 				return nn
 			}
@@ -111,7 +108,7 @@ func (n *node) matchNode(uri string) *node {
 		return nil
 	}
 
-	for _, nn := range cnodes {
+	for _, nn := range childNodes {
 		if nextNode := nn.matchNode(segments[1]); nextNode != nil {
 			return nextNode
 		}

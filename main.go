@@ -1,7 +1,12 @@
 package main
 
+import (
+	"fmt"
+	"strings"
+)
+
 var users []string = []string{
-	"zhangyiming",
+	"ZHANGYIMAANG",
 	"liangrubo",
 }
 
@@ -12,5 +17,7 @@ type Employee struct {
 }
 
 func main() {
-
+	uri := ""
+	res := strings.SplitN(uri, "/", 2)
+	fmt.Println(res)
 }

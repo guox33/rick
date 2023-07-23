@@ -1,3 +1,7 @@
 package framework
 
-type ControllerHandler func(c *Context) error
+type ControlHandler func(c *Context)
+
+type ControlHandlerChain []ControlHandler
+
+type Middleware func(next ControlHandler) ControlHandler

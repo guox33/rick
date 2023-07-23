@@ -5,39 +5,40 @@ import (
 	"net/http"
 )
 
-func FooControllerHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
+func FooControllerHandler(ctx *framework.Context) {
+	_ = ctx.Json(200, map[string]interface{}{
+		"hello": "foo",
 	})
 }
 
-func UserLoginHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
+func UserLoginHandler(ctx *framework.Context) {
+	_ = ctx.Json(200, map[string]interface{}{
+		"hello": "user login",
 	})
 }
 
-func SubjectDelHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
+func SubjectDelHandler(ctx *framework.Context) {
+	panic("del panic")
+	/*_ = ctx.Json(200, map[string]interface{}{
+		"hello": "subject del",
+	})*/
+}
+
+func SubjectUpdateHandler(ctx *framework.Context) {
+	_ = ctx.Json(200, map[string]interface{}{
+		"hello": "subject update",
 	})
 }
 
-func SubjectUpdateHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
+func SubjectGetHandler(ctx *framework.Context) {
+	_ = ctx.Json(200, map[string]interface{}{
+		"hello": "subject get",
 	})
 }
 
-func SubjectGetHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
-	})
-}
-
-func SubjectListHandler(ctx *framework.Context) error {
-	return ctx.Json(200, map[string]interface{}{
-		"hello": "world",
+func SubjectListHandler(ctx *framework.Context) {
+	_ = ctx.Json(200, map[string]interface{}{
+		"hello": "subject list",
 	})
 }
 
