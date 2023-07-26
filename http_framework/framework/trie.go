@@ -48,6 +48,7 @@ func (t *Tree) AddRouter(uri string, handler ...ControlHandler) error {
 			segment: segments[i],
 		}
 		n.children = append(n.children, nn)
+		nn.parent = n
 		n = nn
 	}
 	n.isLast = true
@@ -68,6 +69,7 @@ type node struct {
 	segment  string
 	handler  ControlHandlerChain
 	children []*node
+	parent   *node
 }
 
 func (n *node) filterChildNode(segment string) []*node {
@@ -115,6 +117,14 @@ func (n *node) matchNode(uri string) *node {
 	}
 
 	return nil
+}
+
+func (n *node) getAbsolutePath() string {
+	if n.segment == "" || n.parent == nil {
+		return ""
+	}
+
+	return n.parent.getAbsolutePath() + "/" + n.segment
 }
 
 func isWildSegment(segment string) bool {

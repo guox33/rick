@@ -67,12 +67,13 @@ func (c *Core) ServeHTTP(response http.ResponseWriter, request *http.Request) {
 	// 一个简单的路由选择器，这里直接写死为测试路由foo
 	router := c.findNodeByRequest(request)
 	if router == nil {
-		_ = ctx.Text(404, "not found")
+		ctx.SetStatus(404).Text("not found")
 		return
 	}
 	log.Println("core.router")
 
 	ctx.handlerChain = router.handler
+	ctx.fullPath = router.getAbsolutePath()
 	ctx.Next()
 }
 
