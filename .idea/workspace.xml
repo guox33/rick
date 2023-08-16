@@ -4,29 +4,23 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861e53d2-34e5-4a7e-ace5-8011b9bc967f" name="Changes" comment="test">
+    <list default="true" id="861e53d2-34e5-4a7e-ace5-8011b9bc967f" name="Changes" comment="cmd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/finish/getting-started-with-bsr/proto/buf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/grpc/finish/getting-started-with-bsr/proto/buf.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/buf.gen.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/buf.gen.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/gen/google/type/datetime.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/gen/pet/v1/pet.pb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/gen/pet/v1/petv1connect/pet.connect.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/proto/buf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/proto/buf.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/proto/google/type/datetime.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/proto/pet/v1/pet.proto" beforeDir="false" afterPath="$PROJECT_DIR$/grpc/start/getting-started-with-bsr/proto/pet/v1/pet.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc/start/getting-started-with-buf-cli/proto/pet/v1/pet.proto" beforeDir="false" afterPath="$PROJECT_DIR$/grpc/start/getting-started-with-buf-cli/proto/pet/v1/pet.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/test.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/text.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="MarkdownSettingsMigration">
@@ -37,24 +31,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/bytedance/go/src/github.com/guox33/rick&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/bytedance/go/src/github.com/guox33/rick",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -95,7 +90,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="chore" />
+    <MESSAGE value="cmd" />
+    <option name="LAST_COMMIT_MESSAGE" value="cmd" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -105,7 +102,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/main.go</url>
-          <line>16</line>
+          <line>9</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
