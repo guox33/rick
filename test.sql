@@ -1,17 +1,62 @@
-CREATE TABLE `explorer_collection` (
+CREATE TABLE `explorer_traffic_task` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(1024) COLLATE utf8mb4_general_ci NOT NULL COMMENT '测试集名字',
-  `description` text COLLATE utf8mb4_general_ci COMMENT '测试集记录描述',
-  `source` tinyint NOT NULL DEFAULT '0' COMMENT '数据源，1：cloud-dev, 2：bam',
-  `psm` varchar(128) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'psm',
-  `feature_id` bigint unsigned NOT NULL DEFAULT '0' COMMENT 'bam feature id',
-  `scope` int NOT NULL DEFAULT '0' COMMENT '0:private, 1:public',
-  `authorized` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否授权给别人',
-  `creator` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '创建者',
-  `operator` varchar(128) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '更新者',
-  `deleted` tinyint(1) NOT NULL COMMENT '软删除标志，1代表已删除',
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `psm` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'psm',
+  `service_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'http or thrift',
+  `func_name` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT '方法名',
+  `http_method` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'http方法',
+  `http_path` varchar(190) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'http路径',
+  `zone` varchar(50) COLLATE utf8mb4_general_ci NOT NULL COMMENT '区域',
+  `idc` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '请求idc',
+  `cluster` varchar(190) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '集群',
+  `env` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '环境',
+  `idl_source` tinyint NOT NULL DEFAULT '1' COMMENT 'idl来源',
+  `idl_version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'master' COMMENT 'idl版本',
+  `record_num_setting` int NOT NULL DEFAULT '0' COMMENT '录制条数设置',
+  `record_duration_setting` int NOT NULL DEFAULT '0' COMMENT '录制时长设置（分钟）',
+  `filter` text COLLATE utf8mb4_general_ci COMMENT '参数过滤条件',
+  `status` tinyint NOT NULL DEFAULT '0' COMMENT '任务状态',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '请求时间',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '完成时间',
+  `creator` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `operator` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT '操作人',
+  `deleted` bigint unsigned NOT NULL DEFAULT '0' COMMENT '是否已逻辑删除',
+  `extra` text COLLATE utf8mb4_general_ci COMMENT '额外字段',
   PRIMARY KEY (`id`),
-  KEY `idx_creator` (`creator`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='请求集合'
+  KEY `idx_psm_func_name_http_method_http_path_status_deleted` (`psm`,`func_name`,`http_method`,`http_path`,`status`,`deleted`),
+  KEY `idx_creator_psm_deleted` (`creator`,`psm`,`deleted`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='流量录制任务';
+
+CREATE TABLE `explorer_traffic_task_case` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `task_id` bigint unsigned NOT NULL COMMENT '任务id',
+  `case_id` bigint unsigned NOT NULL COMMENT '用例id',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '请求时间',
+  `deleted` bigint unsigned NOT NULL DEFAULT '0' COMMENT '是否已逻辑删除',
+  PRIMARY KEY (`id`),
+  KEY `idx_task_id_deleted` (`task_id`,`deleted`),
+  KEY `idx_case_id_deleted` (`case_id`,`deleted`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='流量录制任务-用例关联关系';
+
+CREATE TABLE `explorer_traffic_case` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `psm` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'psm',
+  `service_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'http or thrift',
+  `func_name` varchar(190) COLLATE utf8mb4_general_ci NOT NULL COMMENT '方法名',
+  `http_method` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'http方法',
+  `http_path` varchar(190) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'http路径',
+  `zone` varchar(50) COLLATE utf8mb4_general_ci NOT NULL COMMENT '区域',
+  `idc` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '请求idc',
+  `cluster` varchar(190) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '集群',
+  `env` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '环境',
+  `idl_source` tinyint NOT NULL DEFAULT '1' COMMENT 'idl来源',
+  `idl_version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'master' COMMENT 'idl版本',
+  `log_id` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'logId',
+  `request` text COLLATE utf8mb4_general_ci COMMENT '入参',
+  `response` text COLLATE utf8mb4_general_ci COMMENT '返回',
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '请求时间',
+  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '完成时间',
+  `deleted` bigint unsigned NOT NULL DEFAULT '0' COMMENT '是否已逻辑删除',
+  `extra` text COLLATE utf8mb4_general_ci COMMENT '额外字段',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_idx_log_id_deleted` (`log_id`,`deleted`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='流量录制用例';
