@@ -1,23 +1,10 @@
+/*
+Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+*/
 package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-var users []string = []string{
-	"ZHANGYIMAANG",
-	"liangrubo",
-}
-
-type Employee struct {
-	Name       string
-	Department string
-	IsMember   bool
-}
+import "github.com/guox33/rick/cmd"
 
 func main() {
-	uri := ""
-	res := strings.SplitN(uri, "/", 2)
-	fmt.Println(res)
+	cmd.Execute()
 }
